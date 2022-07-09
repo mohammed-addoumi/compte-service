@@ -24,4 +24,19 @@ public class AccountController {
         return accountRepository.save(account);
     }
 
+
+    @DeleteMapping("{id}")
+    public void deleteAccountById(@PathVariable Long id){
+        accountRepository.deleteById(id);
+    }
+
+    @PutMapping("{id}")
+    public Account updateAccount(@PathVariable Long id,@RequestBody Account account){
+        Account accountFetchedFromDB = accountRepository.findById(id)
+                                                    .orElseThrow(() ->
+                                                    new IllegalArgumentException("no user found with ths id " + id));
+        account.setId(accountFetchedFromDB.getId());
+        return accountRepository.save(account);
+    }
+
 }
