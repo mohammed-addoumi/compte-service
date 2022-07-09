@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+
+import static java.time.LocalDate.*;
 
 @Data
 @Entity
@@ -28,4 +27,14 @@ public class Account {
     private LocalDate dateOfBirth;
     private LocalDate createdAt;
     private LocalDate updatedAt;
+
+    @PrePersist
+    public void prePersist(){
+        this.createdAt = now();
+    }
+
+    @PreUpdate
+    public void preUpate(){
+        this.updatedAt = now();
+    }
 }
