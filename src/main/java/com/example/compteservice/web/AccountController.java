@@ -3,8 +3,7 @@ package com.example.compteservice.web;
 import com.example.compteservice.entities.Account;
 import com.example.compteservice.repositories.AccountRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +14,14 @@ public class AccountController {
 
     private final AccountRepository accountRepository;
 
+    @GetMapping("/list")
     public List<Account> getAllAccounts(){
         return accountRepository.findAll();
     }
+
+    @PostMapping("")
+    public Account addAccount(@RequestBody Account account){
+        return accountRepository.save(account);
+    }
+
 }
